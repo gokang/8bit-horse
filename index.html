@@ -20,6 +20,27 @@
             position: relative;
         }
 
+        /* Paper Cutting Art (Jianzhi) - Large background elements */
+        .paper-cut {
+            position: absolute;
+            font-family: monospace;
+            white-space: pre;
+            font-size: 10px;
+            color: rgba(241, 196, 15, 0.15); /* Faded Gold for paper-cut look */
+            z-index: 0;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        /* Large circular paper cut pattern approximation */
+        .jianzhi-circle {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            text-align: center;
+        }
+
         /* Background Art: Clouds & Mountains */
         .bg-art {
             position: absolute;
@@ -58,21 +79,18 @@
         /* Festive Props */
         .lucky {
             position: absolute;
-            font-size: 60px;
+            font-size: 80px;
             image-rendering: pixelated;
             z-index: 1;
         }
 
         .container {
             text-align: center;
-            background-color: rgba(192, 57, 43, 0.85);
+            background-color: transparent; /* Remove yellow frame and background */
             padding: 40px;
-            border: 10px solid #f1c40f;
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
             position: relative;
-            width: 95vw;
-            height: 85vh;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -83,13 +101,13 @@
         .ascii-art {
             font-family: monospace;
             white-space: pre;
-            font-size: clamp(4px, 1vw, 8px);
+            font-size: clamp(4px, 1.2vw, 10px);
             line-height: 1.2;
             color: #f1c40f;
             text-align: center;
             margin: 0 auto;
             display: inline-block;
-            text-shadow: 2px 2px #000;
+            text-shadow: 3px 3px #000;
         }
 
         /* BIGGER HORSES */
@@ -103,7 +121,7 @@
         }
 
         .horse-wrapper {
-            font-size: 250px; /* MUCH BIGGER */
+            font-size: 350px; /* EVEN BIGGER */
             display: inline-block;
             image-rendering: pixelated;
             position: absolute;
@@ -111,37 +129,58 @@
             animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 5s infinite linear;
         }
 
-        /* Different horses with different sizes and speeds */
-        .h1 { bottom: 20%; animation-duration: 0.4s, 5s; font-size: 280px; z-index: 10; opacity: 1; }
-        .h2 { bottom: 40%; animation-duration: 0.35s, 4s; font-size: 200px; z-index: 5; opacity: 0.8; animation-delay: -1s, -1s; }
-        .h3 { bottom: 10%; animation-duration: 0.45s, 6s; font-size: 320px; z-index: 15; opacity: 0.9; animation-delay: -2s, -2s; }
+        .h1 { bottom: 25%; animation-duration: 0.4s, 5s; font-size: 350px; z-index: 10; opacity: 1; }
+        .h2 { bottom: 45%; animation-duration: 0.35s, 4s; font-size: 250px; z-index: 5; opacity: 0.8; animation-delay: -1s, -1s; }
+        .h3 { bottom: 10%; animation-duration: 0.45s, 6s; font-size: 450px; z-index: 15; opacity: 0.9; animation-delay: -2s, -2s; }
 
         .chinese {
-            font-size: 40px;
-            letter-spacing: 15px;
+            font-size: 50px;
+            letter-spacing: 20px;
             text-shadow: 4px 4px #000;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px 40px;
+            border-radius: 50px;
         }
 
         @keyframes gallop {
             from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
-            to { transform: scaleX(-1) translateY(-40px) rotate(5deg); }
+            to { transform: scaleX(-1) translateY(-50px) rotate(5deg); }
         }
 
         @keyframes moveAcross {
-            from { left: -400px; }
+            from { left: -600px; }
             to { left: 110vw; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-art cloud" style="top: 5%; animation-delay: 0s;">
+    <!-- Paper Cutting Background Art -->
+    <div class="paper-cut jianzhi-circle">
+        .         .
+      .: :.     .: :.
+     :  :  :   :  :  :
+    :   :   : :   :   :
+     :  :  :   :  :  :
+      .: :.     .: :.
+        '         '
+    (Traditional Paper Cut Pattern)
+    X X X X X X X X X X X X X X
+    X                         X
+    X      YEAR OF THE        X
+    X         HORSE           X
+    X                         X
+    X X X X X X X X X X X X X X
+    </div>
+
+    <!-- Background Chinese Art -->
+    <div class="bg-art cloud" style="top: 10%; animation-delay: 0s;">
       _  _
     ( `   )_
    (    )    `)
     (_   (_  _)
     </div>
-    <div class="bg-art cloud" style="top: 15%; animation-delay: -7s;">
+    <div class="bg-art cloud" style="top: 25%; animation-delay: -8s;">
       _  _
     ( `   )_
    (    )    `)
@@ -149,19 +188,22 @@
     </div>
 
     <div class="bg-art mountain">
-      /\      /\          /\          /\          /\
-     /  \    /  \  /\    /  \  /\    /  \  /\    /  \
-    /    \  /    \/  \  /    \/  \  /    \/  \  /    \
-   /      \/          \/          \/          \/      \
+      /\      /\          /\          /\          /\          /\
+     /  \    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \
+    /    \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \
+   /      \/          \/          \/          \/          \/      \
     </div>
 
-    <div class="lantern" style="left: 5%;"></div>
-    <div class="lantern" style="left: 20%;"></div>
-    <div class="lantern" style="right: 20%;"></div>
-    <div class="lantern" style="right: 5%;"></div>
+    <!-- Festive Props -->
+    <div class="lantern" style="left: 8%;"></div>
+    <div class="lantern" style="left: 25%;"></div>
+    <div class="lantern" style="right: 25%;"></div>
+    <div class="lantern" style="right: 8%;"></div>
     
-    <div class="lucky" style="bottom: 10%; left: 10%;">🧧</div>
-    <div class="lucky" style="bottom: 10%; right: 10%;">🧨</div>
+    <div class="lucky" style="top: 20%; left: 5%;">🧧</div>
+    <div class="lucky" style="top: 20%; right: 5%;">🧨</div>
+    <div class="lucky" style="bottom: 5%; left: 5%;">🐎</div>
+    <div class="lucky" style="bottom: 5%; right: 5%;">🍊</div>
 
     <div class="container">
         <div class="ascii-art">
