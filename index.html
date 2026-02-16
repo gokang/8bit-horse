@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majestic Horse 2026 🐎</title>
+    <title>8-Bit Year of the Horse 2026 🐎</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         body {
@@ -21,36 +21,45 @@
         .container {
             text-align: center;
             background-color: #1a1a1a;
-            padding: 50px;
+            padding: 60px;
             border: 10px solid #f1c40f;
             border-radius: 20px;
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            position: relative;
+            width: 800px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .horse-wrapper {
-            font-size: 200px;
+            font-size: 150px;
             display: inline-block;
-            animation: gallop 0.6s infinite ease-in-out alternate, moveAcross 5s infinite linear;
-            image-rendering: auto;
-            position: relative;
+            image-rendering: pixelated; /* Forces 8-bit / blocky look */
+            position: absolute;
+            bottom: 120px;
+            /* Flip the horse to face right and run right */
+            transform: scaleX(-1); 
+            animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 4s infinite linear;
         }
         h1 {
-            margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 20px;
             text-shadow: 4px 4px #000;
+            z-index: 10;
         }
         .chinese {
-            margin-top: 30px;
-            font-size: 32px;
+            font-size: 28px;
             letter-spacing: 10px;
             text-shadow: 3px 3px #000;
+            z-index: 10;
         }
         @keyframes gallop {
-            from { transform: translateY(0) rotate(-5deg); }
-            to { transform: translateY(-40px) rotate(5deg); }
+            from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
+            to { transform: scaleX(-1) translateY(-30px) rotate(5deg); }
         }
         @keyframes moveAcross {
-            from { left: -600px; }
-            to { left: 600px; }
+            from { left: -200px; }
+            to { left: 900px; }
         }
     </style>
 </head>
