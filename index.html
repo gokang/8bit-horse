@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Majestic 8-Bit Horse 2026</title>
+    <title>Majestic Horse 2026 🐎</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         body {
@@ -14,185 +14,51 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            image-rendering: pixelated;
             font-family: 'Press+Start+2P', cursive;
             color: #f1c40f;
             overflow: hidden;
         }
-        canvas {
+        .container {
+            text-align: center;
             background-color: #1a1a1a;
-            border: 8px solid #f1c40f;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            padding: 50px;
+            border: 10px solid #f1c40f;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
-        .chinese { margin-top: 20px; font-size: 24px; letter-spacing: 8px; }
+        .horse-wrapper {
+            font-size: 200px;
+            display: inline-block;
+            animation: gallop 0.6s infinite ease-in-out alternate, moveAcross 5s infinite linear;
+            image-rendering: auto;
+            position: relative;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            text-shadow: 4px 4px #000;
+        }
+        .chinese {
+            margin-top: 30px;
+            font-size: 32px;
+            letter-spacing: 10px;
+            text-shadow: 3px 3px #000;
+        }
+        @keyframes gallop {
+            from { transform: translateY(0) rotate(-5deg); }
+            to { transform: translateY(-40px) rotate(5deg); }
+        }
+        @keyframes moveAcross {
+            from { left: -600px; }
+            to { left: 600px; }
+        }
     </style>
 </head>
 <body>
-    <h1>HAPPY YEAR OF THE HORSE 2026</h1>
-    <canvas id="horseCanvas" width="900" height="400"></canvas>
-    <div class="chinese">龙马精神 · 马到成功</div>
-    <script>
-        const canvas = document.getElementById('horseCanvas');
-        const ctx = canvas.getContext('2d');
-        const scale = 3; 
-
-        // 4-Frame Gallop Cycle
-        // Corrected Anatomy: Thin neck, long body, flowing tail, vertical slender legs
-        const horseFrames = [
-            // Frame 1: Extended
-            [
-                "                                                XXXX            ",
-                "                                               XXXXX            ",
-                "                                              XXXXXX            ",
-                "                                             XXX  XX            ",
-                "                                             XXX  XXX           ",
-                "                                              XXXXXXX           ",
-                "                                               XXXXX            ",
-                "                                               XXXX             ",
-                "                                              XXXX              ",
-                "                                             XXXX               ",
-                "                                            XXXX                ",
-                "                                           XXXX                 ",
-                "                                          XXXX                  ",
-                "                  XXXXXXXXXXXX           XXXX                   ",
-                "          XXXXXXXXXXXXXXXXXXXXXXXXXXXX  XXXX                    ",
-                "      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                  ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX              ",
-                "  XX  XXXXXXX   XXXXXX   XXXXXX   XXXXXX   XXXX                 ",
-                "  X   XXXX      XXXX      XXXX      XXXX      X                 ",
-                "  X   XXXX      XXXX      XXXX      XXXX      X                 ",
-                "      XXXX      XXXX      XXXX      XXXX                        ",
-                "      XXXX      XXXX      XXXX      XXXX                        ",
-                "      XXXX      XXXX      XXXX      XXXX                        ",
-                "      XXX       XXX       XXX       XXX                         "
-            ],
-            // Frame 2: Gathering
-            [
-                "                                                XXXX            ",
-                "                                               XXXXX            ",
-                "                                              XXXXXX            ",
-                "                                             XXX  XX            ",
-                "                                             XXX  XXX           ",
-                "                                              XXXXXXX           ",
-                "                                               XXXXX            ",
-                "                                               XXXX             ",
-                "                                              XXXX              ",
-                "                                             XXXX               ",
-                "                                            XXXX                ",
-                "                                           XXXX                 ",
-                "                                          XXXX                  ",
-                "                  XXXXXXXXXXXX           XXXX                   ",
-                "          XXXXXXXXXXXXXXXXXXXXXXXXXXXX  XXXX                    ",
-                "      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                  ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX              ",
-                "          XXXXXX        XXXXXX        XXXXXX                    ",
-                "           XXXXXX      XXXXXX        XXXXXX                     ",
-                "            XXXXXX    XXXXXX        XXXXXX                      ",
-                "             XXXXXX  XXXXXX        XXXXXX                       "
-            ],
-            // Frame 3: Leap
-            [
-                "                                                XXXX            ",
-                "                                               XXXXX            ",
-                "                                              XXXXXX            ",
-                "                                             XXX  XX            ",
-                "                                             XXX  XXX           ",
-                "                                              XXXXXXX           ",
-                "                                               XXXXX            ",
-                "                                               XXXX             ",
-                "                                              XXXX              ",
-                "                                             XXXX               ",
-                "                                            XXXX                ",
-                "                                           XXXX                 ",
-                "                                          XXXX                  ",
-                "                  XXXXXXXXXXXX           XXXX                   ",
-                "          XXXXXXXXXXXXXXXXXXXXXXXXXXXX  XXXX                    ",
-                "      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                  ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX              ",
-                "       XXXXXX                        XXXXXX                     ",
-                "        XXXXXX                      XXXXXX                      ",
-                "         XXXXXX                    XXXXXX                       ",
-                "          XXXXXX                  XXXXXX                        "
-            ],
-            // Frame 4: Contact
-            [
-                "                                                XXXX            ",
-                "                                               XXXXX            ",
-                "                                              XXXXXX            ",
-                "                                             XXX  XX            ",
-                "                                             XXX  XXX           ",
-                "                                              XXXXXXX           ",
-                "                                               XXXXX            ",
-                "                                               XXXX             ",
-                "                                              XXXX              ",
-                "                                             XXXX               ",
-                "                                            XXXX                ",
-                "                                           XXXX                 ",
-                "                                          XXXX                  ",
-                "                  XXXXXXXXXXXX           XXXX                   ",
-                "          XXXXXXXXXXXXXXXXXXXXXXXXXXXX  XXXX                    ",
-                "      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                   ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                  ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                ",
-                "  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX              ",
-                "  XXXXXXX                            XXXXXXX                    ",
-                "  XXXXXXX                            XXXXXXX                    ",
-                "  XXXXXXX                            XXXXXXX                    ",
-                "  XXXXXXX                            XXXXXXX                    "
-            ]
-        ];
-
-        let frameIdx = 0;
-        let xPos = -400;
-
-        function animate() {
-            ctx.fillStyle = "#1a1a1a";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#27ae60";
-            ctx.fillRect(0, 320, canvas.width, 80);
-
-            const frame = horseFrames[frameIdx];
-            const horseX = xPos;
-            const horseY = 120;
-
-            ctx.fillStyle = "#f1c40f";
-            for (let y = 0; y < frame.length; y++) {
-                for (let x = 0; x < frame[y].length; x++) {
-                    if (frame[y][x] === 'X') {
-                        ctx.fillRect(horseX + x * scale, horseY + y * scale, scale, scale);
-                    }
-                }
-            }
-
-            xPos += 20;
-            if (xPos > canvas.width) xPos = -500;
-
-            if (Math.floor(xPos / 25) % 1 === 0) {
-                frameIdx = (frameIdx + 1) % horseFrames.length;
-            }
-
-            requestAnimationFrame(animate);
-        }
-
-        animate();
-    </script>
+    <div class="container">
+        <h1>HAPPY YEAR OF THE HORSE 2026</h1>
+        <div class="horse-wrapper">🐎</div>
+        <div class="chinese">龙马精神 · 马到成功</div>
+    </div>
 </body>
 </html>
