@@ -6,8 +6,9 @@
     <title>8-Bit Year of the Horse 2026 🐎🧧</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
         body {
-            background-color: #c0392b; /* Traditional Chinese Red */
+            background-color: #c0392b;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -15,80 +16,58 @@
             height: 100vh;
             margin: 0;
             font-family: 'Press+Start+2P', cursive;
-            color: #f1c40f; /* Gold */
+            color: #f1c40f;
             overflow: hidden;
             position: relative;
+            /* Force pixelated look for everything */
+            image-rendering: pixelated;
         }
 
-        /* Paper Cutting Art (Jianzhi) - Large background elements */
-        .paper-cut {
+        /* 8-bit Rain of Red Pockets */
+        .falling-red-pocket {
             position: absolute;
-            font-family: monospace;
-            white-space: pre;
-            font-size: 10px;
-            color: rgba(241, 196, 15, 0.15); /* Faded Gold for paper-cut look */
-            z-index: 0;
-            pointer-events: none;
-            line-height: 1;
+            font-size: 40px;
+            top: -50px;
+            z-index: 1;
+            animation: fall linear infinite;
         }
 
-        /* Large circular paper cut pattern approximation */
-        .jianzhi-circle {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12px;
-            text-align: center;
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* Background Art: Clouds & Mountains */
-        .bg-art {
-            position: absolute;
-            font-family: monospace;
-            white-space: pre;
-            font-size: 8px;
-            color: rgba(241, 196, 15, 0.2);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .cloud { top: 50px; animation: float 15s infinite linear; }
-        .mountain { bottom: 0; font-size: 10px; color: rgba(0, 0, 0, 0.1); width: 100%; text-align: center; }
-
-        @keyframes float {
-            from { transform: translateX(-100vw); }
-            to { transform: translateX(100vw); }
-        }
-
-        /* Animated Lanterns */
+        /* BIGGER Animated Lanterns */
         .lantern {
             position: absolute;
-            top: -20px;
-            font-size: 60px;
-            image-rendering: pixelated;
+            top: -10px;
+            font-size: 100px; /* Huge 8-bit lanterns */
             animation: sway 3s infinite ease-in-out alternate;
-            z-index: 1;
+            z-index: 3;
         }
         .lantern::after { content: "🏮"; }
         
         @keyframes sway {
-            from { transform: rotate(-5deg); }
-            to { transform: rotate(5deg); }
+            from { transform: rotate(-8deg); }
+            to { transform: rotate(8deg); }
         }
 
-        /* Festive Props */
-        .lucky {
+        /* More Animated Firecrackers */
+        .firecracker {
             position: absolute;
-            font-size: 80px;
-            image-rendering: pixelated;
-            z-index: 1;
+            font-size: 60px;
+            z-index: 3;
+            animation: pop 0.2s infinite alternate;
+        }
+        .firecracker::after { content: "🧨"; }
+        
+        @keyframes pop {
+            from { transform: scale(1); filter: brightness(1); }
+            to { transform: scale(1.2); filter: brightness(1.5); }
         }
 
+        /* Container for content */
         .container {
             text-align: center;
-            background-color: transparent; /* Remove yellow frame and background */
-            padding: 40px;
-            position: relative;
             width: 100vw;
             height: 100vh;
             display: flex;
@@ -96,21 +75,21 @@
             justify-content: space-between;
             align-items: center;
             z-index: 2;
+            padding: 40px 0;
+            pointer-events: none;
         }
 
         .ascii-art {
             font-family: monospace;
             white-space: pre;
             font-size: clamp(4px, 1.2vw, 10px);
-            line-height: 1.2;
+            line-height: 1.1;
             color: #f1c40f;
-            text-align: center;
-            margin: 0 auto;
-            display: inline-block;
-            text-shadow: 3px 3px #000;
+            text-shadow: 4px 4px #000;
+            pointer-events: auto;
         }
 
-        /* BIGGER HORSES */
+        /* STAMPEDE */
         .horse-stampede {
             position: absolute;
             width: 100%;
@@ -121,89 +100,85 @@
         }
 
         .horse-wrapper {
-            font-size: 350px; /* EVEN BIGGER */
+            font-size: 380px; 
             display: inline-block;
-            image-rendering: pixelated;
             position: absolute;
             transform: scaleX(-1); 
             animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 5s infinite linear;
         }
 
-        .h1 { bottom: 25%; animation-duration: 0.4s, 5s; font-size: 350px; z-index: 10; opacity: 1; }
-        .h2 { bottom: 45%; animation-duration: 0.35s, 4s; font-size: 250px; z-index: 5; opacity: 0.8; animation-delay: -1s, -1s; }
-        .h3 { bottom: 10%; animation-duration: 0.45s, 6s; font-size: 450px; z-index: 15; opacity: 0.9; animation-delay: -2s, -2s; }
+        .h1 { bottom: 20%; animation-duration: 0.4s, 5s; z-index: 10; }
+        .h2 { bottom: 50%; animation-duration: 0.3s, 4s; font-size: 280px; z-index: 5; opacity: 0.8; }
+        .h3 { bottom: 5%; animation-duration: 0.5s, 7s; font-size: 450px; z-index: 15; }
 
         .chinese {
-            font-size: 50px;
-            letter-spacing: 20px;
-            text-shadow: 4px 4px #000;
-            margin-bottom: 40px;
-            background: rgba(0,0,0,0.2);
-            padding: 10px 40px;
-            border-radius: 50px;
+            font-size: 45px;
+            letter-spacing: 15px;
+            text-shadow: 6px 6px #000;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 20px 60px;
+            border: 4px solid #f1c40f;
+            pointer-events: auto;
         }
 
         @keyframes gallop {
             from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
-            to { transform: scaleX(-1) translateY(-50px) rotate(5deg); }
+            to { transform: scaleX(-1) translateY(-60px) rotate(5deg); }
         }
 
         @keyframes moveAcross {
             from { left: -600px; }
             to { left: 110vw; }
         }
+
+        /* Background Mountains/Clouds */
+        .mountain-bg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-family: monospace;
+            white-space: pre;
+            font-size: 12px;
+            color: rgba(0,0,0,0.15);
+            text-align: center;
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
-    <!-- Paper Cutting Background Art -->
-    <div class="paper-cut jianzhi-circle">
-        .         .
-      .: :.     .: :.
-     :  :  :   :  :  :
-    :   :   : :   :   :
-     :  :  :   :  :  :
-      .: :.     .: :.
-        '         '
-    (Traditional Paper Cut Pattern)
-    X X X X X X X X X X X X X X
-    X                         X
-    X      YEAR OF THE        X
-    X         HORSE           X
-    X                         X
-    X X X X X X X X X X X X X X
+    <div class="mountain-bg">
+      /\      /\          /\          /\          /\          /\          /\
+     /  \    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \
+    /    \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \
     </div>
 
-    <!-- Background Chinese Art -->
-    <div class="bg-art cloud" style="top: 10%; animation-delay: 0s;">
-      _  _
-    ( `   )_
-   (    )    `)
-    (_   (_  _)
-    </div>
-    <div class="bg-art cloud" style="top: 25%; animation-delay: -8s;">
-      _  _
-    ( `   )_
-   (    )    `)
-    (_   (_  _)
-    </div>
+    <!-- Red Pockets Falling -->
+    <script>
+        function createRedPocket() {
+            const pocket = document.createElement('div');
+            pocket.className = 'falling-red-pocket';
+            pocket.innerText = '🧧';
+            pocket.style.left = Math.random() * 100 + 'vw';
+            pocket.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            pocket.style.opacity = Math.random() * 0.5 + 0.5;
+            document.body.appendChild(pocket);
+            setTimeout(() => pocket.remove(), 5000);
+        }
+        setInterval(createRedPocket, 300);
+    </script>
 
-    <div class="bg-art mountain">
-      /\      /\          /\          /\          /\          /\
-     /  \    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \
-    /    \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \
-   /      \/          \/          \/          \/          \/      \
-    </div>
+    <!-- Huge Animated Lanterns -->
+    <div class="lantern" style="left: 5%;"></div>
+    <div class="lantern" style="left: 25%; animation-delay: -1s;"></div>
+    <div class="lantern" style="right: 25%; animation-delay: -0.5s;"></div>
+    <div class="lantern" style="right: 5%; animation-delay: -2s;"></div>
 
-    <!-- Festive Props -->
-    <div class="lantern" style="left: 8%;"></div>
-    <div class="lantern" style="left: 25%;"></div>
-    <div class="lantern" style="right: 25%;"></div>
-    <div class="lantern" style="right: 8%;"></div>
-    
-    <div class="lucky" style="top: 20%; left: 5%;">🧧</div>
-    <div class="lucky" style="top: 20%; right: 5%;">🧨</div>
-    <div class="lucky" style="bottom: 5%; left: 5%;">🐎</div>
-    <div class="lucky" style="bottom: 5%; right: 5%;">🍊</div>
+    <!-- More Animated Firecrackers -->
+    <div class="firecracker" style="top: 20%; left: 15%;"></div>
+    <div class="firecracker" style="top: 40%; left: 10%; animation-delay: -0.1s;"></div>
+    <div class="firecracker" style="top: 20%; right: 15%; animation-delay: -0.05s;"></div>
+    <div class="firecracker" style="top: 40%; right: 10%; animation-delay: -0.15s;"></div>
 
     <div class="container">
         <div class="ascii-art">
