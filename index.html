@@ -160,14 +160,30 @@
         }
 
         .ascii-art {
-            font-family: monospace;
-            white-space: pre;
-            font-size: clamp(6px, 1.4vw, 12px);
-            line-height: 1.1;
+            font-family: 'Press Start 2P', cursive;
+            white-space: normal;
+            font-size: 60px;
+            line-height: 1.5;
             color: #f1c40f;
             text-shadow: 6px 6px #000;
             font-weight: bold;
-            margin-top: 200px;
+            margin-top: 100px;
+            width: 80%;
+            perspective: 400px;
+            overflow: visible;
+        }
+
+        .star-wars-crawl {
+            position: relative;
+            transform: rotateX(25deg);
+            transform-origin: 50% 100%;
+            animation: crawl 20s linear infinite;
+            text-align: center;
+        }
+
+        @keyframes crawl {
+            0% { top: 300px; transform: rotateX(25deg) translateY(0); opacity: 1; }
+            100% { top: -600px; transform: rotateX(25deg) translateY(-1000px); opacity: 0; }
         }
 
         /* STAMPEDE */
@@ -312,29 +328,11 @@
 
     <div class="container">
         <div class="ascii-art">
- _   _   _   ____   ____  __   __ 
-| | | | / \ |  _ \ |  _ \ \ \ / / 
-| |_| |/ _ \| |_) || |_) | \ V /  
-|  _  / ___ \  __/ |  __/   | |   
-|_| |_/_/   \_\_|    |_|      |_|   
-                                    
-__   _______   _   ____    
-\ \ / / ____| / \ |  _ \   
- \ V /|  _|  / _ \| |_) |  
-  | | | |___/ ___ \  _ <   
-  |_| |_____/_/   \_\_| \_\ 
-                            
-  ___   _____   _____ _   _ _____ 
- / _ \ |  ___| |_   _| | | | ____|
-| | | || |_      | | | |_| |  _|  
-| |_| ||  _|     | | |  _  | |___ 
- \___/ |_|       |_| |_| |_|_____|
-                                  
- _   _  ___  ____  ____  _____    
-| | | |/ _ \|  _ \/ ___|| ____|   
-| |_| | | | | |_) \___ \|  _|     
-|  _  | |_| |  _ < ___) | |___     
-|_| |_|\___/|_| \_\____/|_____|    
+            <div class="star-wars-crawl">
+                HAPPY YEAR<br>
+                OF THE<br>
+                HORSE 2026
+            </div>
         </div>
         
         <div class="horse-stampede">
