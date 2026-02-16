@@ -19,7 +19,6 @@
             color: #f1c40f;
             overflow: hidden;
             position: relative;
-            /* Force pixelated look for everything */
             image-rendering: pixelated;
         }
 
@@ -31,41 +30,88 @@
             z-index: 1;
             animation: fall linear infinite;
         }
-
         @keyframes fall {
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* BIGGER Animated Lanterns */
+        /* HUGE Animated Lanterns */
         .lantern {
             position: absolute;
             top: -10px;
-            font-size: 100px; /* Huge 8-bit lanterns */
-            animation: sway 3s infinite ease-in-out alternate;
+            font-size: 100px;
+            animation: sway 3.5s infinite ease-in-out alternate;
             z-index: 3;
+            transform-origin: top center;
         }
         .lantern::after { content: "🏮"; }
-        
+        .lantern::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 50px;
+            background: #f1c40f;
+            z-index: -1;
+        }
         @keyframes sway {
             from { transform: rotate(-8deg); }
             to { transform: rotate(8deg); }
         }
 
-        /* More Animated Firecrackers */
-        .firecracker {
+        /* HANGING EXPLODING FIRECRACKERS */
+        .firecracker-string {
             position: absolute;
-            font-size: 60px;
-            z-index: 3;
-            animation: pop 0.2s infinite alternate;
-        }
-        .firecracker::after { content: "🧨"; }
-        
-        @keyframes pop {
-            from { transform: scale(1); filter: brightness(1); }
-            to { transform: scale(1.2); filter: brightness(1.5); }
+            top: 0;
+            width: 10px;
+            height: 300px;
+            background: repeating-linear-gradient(to bottom, #f1c40f, #f1c40f 10px, transparent 10px, transparent 20px);
+            z-index: 4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Container for content */
+        .cracker {
+            font-size: 40px;
+            margin-top: -10px;
+            animation: shake 0.1s infinite;
+        }
+        .cracker::after { content: "🧨"; }
+
+        .explosion {
+            position: absolute;
+            font-size: 50px;
+            pointer-events: none;
+            z-index: 5;
+            animation: burst 0.4s forwards;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            50% { transform: translate(-1px, -2px) rotate(-1deg); }
+            100% { transform: translate(1px, -1px) rotate(1deg); }
+        }
+
+        @keyframes burst {
+            0% { transform: scale(0.1); opacity: 1; }
+            50% { transform: scale(1.5); color: #fff; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #f1c40f;
+            z-index: 4;
+            animation: fallConfetti 1s forwards;
+        }
+        @keyframes fallConfetti {
+            to { transform: translateY(500px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Container */
         .container {
             text-align: center;
             width: 100vw;
@@ -86,7 +132,6 @@
             line-height: 1.1;
             color: #f1c40f;
             text-shadow: 4px 4px #000;
-            pointer-events: auto;
         }
 
         /* STAMPEDE */
@@ -98,62 +143,39 @@
             left: 0;
             pointer-events: none;
         }
-
         .horse-wrapper {
-            font-size: 380px; 
+            font-size: 350px; 
             display: inline-block;
             position: absolute;
             transform: scaleX(-1); 
             animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 5s infinite linear;
         }
-
         .h1 { bottom: 20%; animation-duration: 0.4s, 5s; z-index: 10; }
-        .h2 { bottom: 50%; animation-duration: 0.3s, 4s; font-size: 280px; z-index: 5; opacity: 0.8; }
-        .h3 { bottom: 5%; animation-duration: 0.5s, 7s; font-size: 450px; z-index: 15; }
+        .h2 { bottom: 50%; animation-duration: 0.3s, 4s; font-size: 250px; z-index: 5; opacity: 0.8; }
+        .h3 { bottom: 5%; animation-duration: 0.5s, 7s; font-size: 400px; z-index: 15; }
 
         .chinese {
             font-size: 45px;
             letter-spacing: 15px;
             text-shadow: 6px 6px #000;
             margin-bottom: 20px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
             padding: 20px 60px;
             border: 4px solid #f1c40f;
-            pointer-events: auto;
         }
 
         @keyframes gallop {
             from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
             to { transform: scaleX(-1) translateY(-60px) rotate(5deg); }
         }
-
         @keyframes moveAcross {
             from { left: -600px; }
             to { left: 110vw; }
         }
-
-        /* Background Mountains/Clouds */
-        .mountain-bg {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            font-family: monospace;
-            white-space: pre;
-            font-size: 12px;
-            color: rgba(0,0,0,0.15);
-            text-align: center;
-            z-index: 0;
-        }
     </style>
 </head>
 <body>
-    <div class="mountain-bg">
-      /\      /\          /\          /\          /\          /\          /\
-     /  \    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \  /\    /  \
-    /    \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \/  \  /    \
-    </div>
-
-    <!-- Red Pockets Falling -->
+    <!-- Falling Red Pockets -->
     <script>
         function createRedPocket() {
             const pocket = document.createElement('div');
@@ -161,24 +183,52 @@
             pocket.innerText = '🧧';
             pocket.style.left = Math.random() * 100 + 'vw';
             pocket.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            pocket.style.opacity = Math.random() * 0.5 + 0.5;
             document.body.appendChild(pocket);
             setTimeout(() => pocket.remove(), 5000);
         }
-        setInterval(createRedPocket, 300);
+        setInterval(createRedPocket, 400);
+
+        function explode(x, y) {
+            const burst = document.createElement('div');
+            burst.className = 'explosion';
+            burst.innerText = '💥';
+            burst.style.left = x + 'px';
+            burst.style.top = y + 'px';
+            document.body.appendChild(burst);
+            
+            for(let i=0; i<5; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = x + 'px';
+                c.style.top = y + 'px';
+                c.style.transform = `rotate(${Math.random()*360}deg)`;
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 1000);
+            }
+            setTimeout(() => burst.remove(), 400);
+        }
+
+        setInterval(() => {
+            const crackers = document.querySelectorAll('.cracker');
+            if(crackers.length > 0) {
+                const target = crackers[Math.floor(Math.random() * crackers.length)];
+                const rect = target.getBoundingClientRect();
+                explode(rect.left, rect.top);
+            }
+        }, 300);
     </script>
 
-    <!-- Huge Animated Lanterns -->
-    <div class="lantern" style="left: 5%;"></div>
-    <div class="lantern" style="left: 25%; animation-delay: -1s;"></div>
-    <div class="lantern" style="right: 25%; animation-delay: -0.5s;"></div>
-    <div class="lantern" style="right: 5%; animation-delay: -2s;"></div>
+    <!-- Hanging Firecrackers -->
+    <div class="firecracker-string" style="left: 15%;">
+        <div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div>
+    </div>
+    <div class="firecracker-string" style="right: 15%;">
+        <div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div>
+    </div>
 
-    <!-- More Animated Firecrackers -->
-    <div class="firecracker" style="top: 20%; left: 15%;"></div>
-    <div class="firecracker" style="top: 40%; left: 10%; animation-delay: -0.1s;"></div>
-    <div class="firecracker" style="top: 20%; right: 15%; animation-delay: -0.05s;"></div>
-    <div class="firecracker" style="top: 40%; right: 10%; animation-delay: -0.15s;"></div>
+    <!-- Huge Animated Lanterns -->
+    <div class="lantern" style="left: 35%;"></div>
+    <div class="lantern" style="right: 35%;"></div>
 
     <div class="container">
         <div class="ascii-art">
