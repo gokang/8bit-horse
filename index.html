@@ -26,12 +26,12 @@
             font-family: monospace;
             white-space: pre;
             font-size: 8px;
-            color: rgba(241, 196, 15, 0.2); /* Faded Gold */
+            color: rgba(241, 196, 15, 0.2);
             z-index: 0;
             pointer-events: none;
         }
 
-        .cloud { top: 50px; animation: float 10s infinite linear; }
+        .cloud { top: 50px; animation: float 15s infinite linear; }
         .mountain { bottom: 0; font-size: 10px; color: rgba(0, 0, 0, 0.1); width: 100%; text-align: center; }
 
         @keyframes float {
@@ -43,32 +43,22 @@
         .lantern {
             position: absolute;
             top: -20px;
-            font-size: 50px;
+            font-size: 60px;
             image-rendering: pixelated;
             animation: sway 3s infinite ease-in-out alternate;
             z-index: 1;
         }
         .lantern::after { content: "🏮"; }
-        .lantern::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 2px;
-            height: 100px;
-            background: #f1c40f;
-            z-index: -1;
-        }
         
         @keyframes sway {
             from { transform: rotate(-5deg); }
             to { transform: rotate(5deg); }
         }
 
-        /* Red Envelopes / Firecrackers */
+        /* Festive Props */
         .lucky {
             position: absolute;
-            font-size: 40px;
+            font-size: 60px;
             image-rendering: pixelated;
             z-index: 1;
         }
@@ -81,18 +71,19 @@
             border-radius: 20px;
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
             position: relative;
-            width: 900px;
-            height: 550px;
+            width: 95vw;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center;
             z-index: 2;
         }
 
         .ascii-art {
             font-family: monospace;
             white-space: pre;
-            font-size: 8px;
+            font-size: clamp(4px, 1vw, 8px);
             line-height: 1.2;
             color: #f1c40f;
             text-align: center;
@@ -101,42 +92,56 @@
             text-shadow: 2px 2px #000;
         }
 
+        /* BIGGER HORSES */
+        .horse-stampede {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
         .horse-wrapper {
-            font-size: 150px;
+            font-size: 250px; /* MUCH BIGGER */
             display: inline-block;
             image-rendering: pixelated;
             position: absolute;
-            bottom: 150px;
             transform: scaleX(-1); 
-            animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 4s infinite linear;
+            animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 5s infinite linear;
         }
 
+        /* Different horses with different sizes and speeds */
+        .h1 { bottom: 20%; animation-duration: 0.4s, 5s; font-size: 280px; z-index: 10; opacity: 1; }
+        .h2 { bottom: 40%; animation-duration: 0.35s, 4s; font-size: 200px; z-index: 5; opacity: 0.8; animation-delay: -1s, -1s; }
+        .h3 { bottom: 10%; animation-duration: 0.45s, 6s; font-size: 320px; z-index: 15; opacity: 0.9; animation-delay: -2s, -2s; }
+
         .chinese {
-            font-size: 28px;
-            letter-spacing: 10px;
-            text-shadow: 3px 3px #000;
+            font-size: 40px;
+            letter-spacing: 15px;
+            text-shadow: 4px 4px #000;
+            margin-bottom: 20px;
         }
 
         @keyframes gallop {
             from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
-            to { transform: scaleX(-1) translateY(-30px) rotate(5deg); }
+            to { transform: scaleX(-1) translateY(-40px) rotate(5deg); }
         }
 
         @keyframes moveAcross {
-            from { left: -200px; }
-            to { left: 1000px; }
+            from { left: -400px; }
+            to { left: 110vw; }
         }
     </style>
 </head>
 <body>
-    <!-- Background Chinese Art -->
-    <div class="bg-art cloud" style="top: 10%; animation-delay: 0s;">
+    <div class="bg-art cloud" style="top: 5%; animation-delay: 0s;">
       _  _
     ( `   )_
    (    )    `)
     (_   (_  _)
     </div>
-    <div class="bg-art cloud" style="top: 25%; animation-delay: -5s;">
+    <div class="bg-art cloud" style="top: 15%; animation-delay: -7s;">
       _  _
     ( `   )_
    (    )    `)
@@ -144,20 +149,19 @@
     </div>
 
     <div class="bg-art mountain">
-      /\      /\          /\
-     /  \    /  \  /\    /  \
-    /    \  /    \/  \  /    \
-   /      \/          \/      \
+      /\      /\          /\          /\          /\
+     /  \    /  \  /\    /  \  /\    /  \  /\    /  \
+    /    \  /    \/  \  /    \/  \  /    \/  \  /    \
+   /      \/          \/          \/          \/      \
     </div>
 
-    <!-- Festive Props -->
     <div class="lantern" style="left: 5%;"></div>
     <div class="lantern" style="left: 20%;"></div>
-    <div class="lantern" style="left: 75%;"></div>
-    <div class="lantern" style="left: 90%;"></div>
+    <div class="lantern" style="right: 20%;"></div>
+    <div class="lantern" style="right: 5%;"></div>
     
-    <div class="lucky" style="bottom: 5%; left: 5%;">🧧</div>
-    <div class="lucky" style="bottom: 5%; right: 5%;">🧨</div>
+    <div class="lucky" style="bottom: 10%; left: 10%;">🧧</div>
+    <div class="lucky" style="bottom: 10%; right: 10%;">🧨</div>
 
     <div class="container">
         <div class="ascii-art">
@@ -186,7 +190,11 @@
 |_| |_|\___/|_| \_\____/|_____|    
         </div>
         
-        <div class="horse-wrapper">🐎</div>
+        <div class="horse-stampede">
+            <div class="horse-wrapper h1">🐎</div>
+            <div class="horse-wrapper h2">🐎</div>
+            <div class="horse-wrapper h3">🐎</div>
+        </div>
         
         <div class="chinese">龙马精神 · 马到成功</div>
     </div>
