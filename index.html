@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Year of the Horse 2026 - The Majestic Stallion</title>
+    <title>Year of the Horse 2026 - The Majestic Gallop</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -22,106 +22,98 @@
         }
 
         canvas {
-            background-color: #000;
-            border: 8px solid #f1c40f;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            background-color: #1a1a1a;
+            border: 6px solid #f1c40f;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
         h1 {
             margin-bottom: 10px;
-            font-size: 20px;
-            text-shadow: 3px 3px #000;
+            font-size: 18px;
+            text-shadow: 2px 2px #000;
         }
 
         .chinese {
-            margin-top: 20px;
-            font-size: 24px;
-            letter-spacing: 8px;
+            margin-top: 15px;
+            font-size: 20px;
+            letter-spacing: 6px;
         }
     </style>
 </head>
 <body>
     <h1>HAPPY YEAR OF THE HORSE 2026</h1>
-    <canvas id="horseCanvas" width="960" height="540"></canvas>
+    <canvas id="horseCanvas" width="900" height="400"></canvas>
     <div class="chinese">龙马精神 · 马到成功</div>
     <script>
         const canvas = document.getElementById('horseCanvas');
         const ctx = canvas.getContext('2d');
-        const scale = 5;
+        const scale = 4;
 
-        // NEW MAJESTIC HORSE: 
-        // 1. Long muscular body (Horizontal dominance)
-        // 2. High elegant neck + Elongated head + Ears
-        // 3. Long powerful legs (4 distinct legs)
-        // 4. Tail for balance
-        
+        // AUTHENTIC 8-BIT HORSE SPRITE (Classic side-scroller proportions)
+        // Correcting anatomy: 
+        // - Long flat back
+        // - High-arched thin neck
+        // - Lean head (not bulky)
+        // - Flowing tail
+        // - Thin, articulated legs
         const frames = [
-            // Frame 1: Extended Gallop
+            // Frame 1: Extended
             [
-                "                                       XXXXX                    ",
-                "                                     XXXXXXXX                   ",
-                "                                    XXXXXXXXXX                  ",
-                "                                    XXXXXXXXXXX                 ",
-                "                                    XXX   XXXXX                 ",
-                "                                    XXX    XXXX                 ",
-                "                                     XX    XXXX                 ",
-                "                                      X   XXXXX                 ",
-                "                                         XXXXX                  ",
-                "                                        XXXXX                   ",
-                "                                       XXXXX                    ",
-                "                                      XXXXX                     ",
-                "                                     XXXXX                      ",
-                "                                    XXXXX                       ",
-                "                     XXXXXXXXXXXXXXXXXXXX                       ",
-                "              XXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                        ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                          ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                           ",
-                "   XXXXX  XXXXX            XXXXX  XXXXX                         ",
-                "  XXXXX    XXXXX          XXXXX    XXXXX                        ",
-                "  XXXX      XXXX          XXXX      XXXX                        ",
-                "  XXX        XXX          XXX        XXX                        ",
-                "  XX          XX          XX          XX                        ",
-                "  X            X          X            X                        ",
-                "  X            X          X            X                        "
+                "                                  XXXXXX                        ",
+                "                                 XX    XX                       ",
+                "                                 X      XX                      ",
+                "                                 X  XX  XX                      ",
+                "                                  XXXXXXX                       ",
+                "                                    XXXX                        ",
+                "                                    XXXX                        ",
+                "                                   XXXX                         ",
+                "                                  XXXX                          ",
+                "          XXXXXX                 XXXX                           ",
+                "        XXXXXXXXX               XXXX                            ",
+                "       XXXXXXXXXXX             XXXX                             ",
+                "      XXXXXXXXXXXXXX          XXXX                              ",
+                "     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                      ",
+                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                     ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                     ",
+                "   XXXXXXXXXXXXXX   XXXXXX   XXXXXX   XXXXX                     ",
+                "   XXXXXXXXXXXX      XXXX     XXXX      XXX                     ",
+                "   XXXXXXXXXX        XXXX     XXXX       XX                     ",
+                "    XXXXXXXX         XXXX     XXXX       XX                     ",
+                "     XXXXXX          XXXX     XXXX       XX                     ",
+                "      XXXX           XXXX     XXXX       X                      ",
+                "       XX            XXXX     XXXX       X                      ",
+                "                     XXXX     XXXX       X                      ",
+                "                     XXXX     XXXX       X                      ",
+                "                     XXX       XXX       X                      "
             ],
-            // Frame 2: Gathering Power
+            // Frame 2: Gathering
             [
-                "                                       XXXXX                    ",
-                "                                     XXXXXXXX                   ",
-                "                                    XXXXXXXXXX                  ",
-                "                                    XXXXXXXXXXX                 ",
-                "                                    XXX   XXXXX                 ",
-                "                                    XXX    XXXX                 ",
-                "                                     XX    XXXX                 ",
-                "                                      X   XXXXX                 ",
-                "                                         XXXXX                  ",
-                "                                        XXXXX                   ",
-                "                                       XXXXX                    ",
-                "                                      XXXXX                     ",
-                "                                     XXXXX                      ",
-                "                                    XXXXX                       ",
-                "                     XXXXXXXXXXXXXXXXXXXX                       ",
-                "              XXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                       ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                        ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                          ",
-                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                           ",
-                "          XXXXXX          XXXXXX                                ",
-                "           XXXXXX        XXXXXX                                 ",
-                "            XXXX          XXXX                                  ",
-                "             XXX          XXX                                   ",
-                "              XX          XX                                    ",
-                "               X          X                                     "
+                "                                  XXXXXX                        ",
+                "                                 XX    XX                       ",
+                "                                 X      XX                      ",
+                "                                 X  XX  XX                      ",
+                "                                  XXXXXXX                       ",
+                "                                    XXXX                        ",
+                "                                    XXXX                        ",
+                "                                   XXXX                         ",
+                "                                  XXXX                          ",
+                "          XXXXXX                 XXXX                           ",
+                "        XXXXXXXXX               XXXX                            ",
+                "       XXXXXXXXXXX             XXXX                             ",
+                "      XXXXXXXXXXXXXX          XXXX                              ",
+                "     XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                      ",
+                "    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                     ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                    ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                     ",
+                "   XXXXXXXXXXXXXX      XXXX  XXXX      XXXX                     ",
+                "   XXXXXXXXXXXX         XXXX XXXX       XXX                     ",
+                "   XXXXXXXXXX            XXXXXXX         XX                     ",
+                "    XXXXXXXX              XXXXX          XX                     ",
+                "     XXXXXX                XXX           XX                     ",
+                "      XXXX                  X            X                      "
             ]
         ];
 
@@ -129,16 +121,16 @@
         let frameIdx = 0;
 
         function animate() {
-            ctx.fillStyle = "#000";
+            ctx.fillStyle = "#1a1a1a";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             // Ground
-            ctx.fillStyle = "#1b5e20";
-            ctx.fillRect(0, 480, canvas.width, 60);
+            ctx.fillStyle = "#2ecc71";
+            ctx.fillRect(0, 340, canvas.width, 60);
 
             const frame = frames[frameIdx];
             const horseX = xPos;
-            const horseY = 180;
+            const horseY = 150;
 
             ctx.fillStyle = "#f1c40f"; // Golden
             for (let y = 0; y < frame.length; y++) {
@@ -149,7 +141,7 @@
                 }
             }
 
-            xPos += 18;
+            xPos += 20;
             if (xPos > canvas.width) xPos = -600;
 
             if (Math.floor(xPos / 40) % 1 === 0) {
