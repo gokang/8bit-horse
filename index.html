@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-Bit Animated Horse</title>
+    <title>8-Bit Realistic Running Horse</title>
     <style>
         body {
             background-color: #2c3e50;
@@ -15,212 +15,128 @@
             image-rendering: pixelated;
         }
         canvas {
-            background-color: #ecf0f1;
+            background-color: #7f8c8d;
             border: 8px solid #34495e;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
-    <canvas id="horseCanvas" width="600" height="400"></canvas>
+    <canvas id="horseCanvas" width="640" height="320"></canvas>
     <script>
         const canvas = document.getElementById('horseCanvas');
         const ctx = canvas.getContext('2d');
-        const scale = 8;
+        const scale = 4;
 
-        // More realistic 8-bit horse running animation (10 frames)
-        // Reference: Classic 2D side-scroller horse run cycle
-        const frames = [
-            // Frame 1
+        // Realistic 8-bit Gallop Cycle (approx 32x20 pixels)
+        const horseFrames = [
+            // Frame 1: Extended
             [
-                "                ",
-                "      XXXXX     ",
-                "     XXXXXXX    ",
-                "     XX O XX    ",
-                "     XXXXXXX    ",
-                "      XXXXX     ",
-                "   XXXXXXXXXX   ",
-                "  XXXXXXXXXXXX  ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                "  XX  XX  XX  X ",
-                "  X   X    X    ",
-                "  X   X    X    ",
-                "  X   X    X    ",
-                "                "
+                "                XXXXXX          ",
+                "               XXXXXXXX         ",
+                "               XXX  XXXX        ",
+                "               XXXXXXXX         ",
+                "                XXXXXX          ",
+                "      XXXXXXXXXXXXXXXXXX        ",
+                "    XXXXXXXXXXXXXXXXXXXXXX      ",
+                "  XXXXXXXXXXXXXXXXXXXXXXXXXX    ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XX    XX            XX    XX   ",
+                " XX    XX            XX    XX   ",
+                " X      X            X      X   ",
+                " X      X            X      X   "
             ],
-            // Frame 2
+            // Frame 2: Gathering
             [
-                "                ",
-                "      XXXXX     ",
-                "     XXXXXXX    ",
-                "     XX O XX    ",
-                "     XXXXXXX    ",
-                "      XXXXX     ",
-                "   XXXXXXXXXX   ",
-                "  XXXXXXXXXXXX  ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                "  XX   X   X  X ",
-                "  X    X   X  X ",
-                "  X        X    ",
-                "                ",
-                "                "
+                "                XXXXXX          ",
+                "               XXXXXXXX         ",
+                "               XXX  XXXX        ",
+                "               XXXXXXXX         ",
+                "                XXXXXX          ",
+                "        XXXXXXXXXXXXXXXXXX      ",
+                "      XXXXXXXXXXXXXXXXXXXXXX    ",
+                "    XXXXXXXXXXXXXXXXXXXXXXXXXX  ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXX ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXX ",
+                "   XXXXXXXXXXXXXXXXXXXXXXXXXXXX ",
+                "      XXXXX        XXXXX        ",
+                "       XXXX         XXXX        ",
+                "        XXX          XXX        ",
+                "         XX           XX        "
             ],
-             // Frame 3
+            // Frame 3: Mid-air
             [
-                "                ",
-                "      XXXXX     ",
-                "     XXXXXXX    ",
-                "     XX O XX    ",
-                "     XXXXXXX    ",
-                "      XXXXX     ",
-                "   XXXXXXXXXX   ",
-                "  XXXXXXXXXXXX  ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                "  X   XX  XX  X ",
-                "      XX  XX    ",
-                "                ",
-                "                ",
-                "                "
+                "                XXXXXX          ",
+                "               XXXXXXXX         ",
+                "               XXX  XXXX        ",
+                "               XXXXXXXX         ",
+                "                XXXXXX          ",
+                "      XXXXXXXXXXXXXXXXXX        ",
+                "    XXXXXXXXXXXXXXXXXXXXXX      ",
+                "  XXXXXXXXXXXXXXXXXXXXXXXXXX    ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                "   XXXX                XXXX     ",
+                "    XXX                XXX      ",
+                "    XX                 XX       ",
+                "    X                  X        "
             ],
-            // Frame 4
+            // Frame 4: Contact
             [
-                "                ",
-                "      XXXXX     ",
-                "     XXXXXXX    ",
-                "     XX O XX    ",
-                "     XXXXXXX    ",
-                "      XXXXX     ",
-                "   XXXXXXXXXX   ",
-                "  XXXXXXXXXXXX  ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                " XXXXXXXXXXXXXX ",
-                "  X  XXX  XX  X ",
-                "  X  X    X   X ",
-                "  X  X    X   X ",
-                "                ",
-                "                "
+                "                XXXXXX          ",
+                "               XXXXXXXX         ",
+                "               XXX  XXXX        ",
+                "               XXXXXXXX         ",
+                "                XXXXXX          ",
+                "      XXXXXXXXXXXXXXXXXX        ",
+                "    XXXXXXXXXXXXXXXXXXXXXX      ",
+                "  XXXXXXXXXXXXXXXXXXXXXXXXXX    ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XXXXXXXXXXXXXXXXXXXXXXXXXXXX   ",
+                " XX   XX          XX   XX       ",
+                " XX   XX          XX   XX       ",
+                " XX   XX          XX   XX       ",
+                " XX   XX          XX   XX       "
             ]
         ];
 
-        // Let's refine the pixel art logic to be more descriptive
+        let frameIdx = 0;
+        let xPos = -200;
+
         function drawPixel(x, y, color) {
             ctx.fillStyle = color;
             ctx.fillRect(x * scale, y * scale, scale, scale);
         }
 
-        // Realistic Horse Sprite (32x16 approximation)
-        const horseRun = [
-            // Frame 0
-            [
-                "          XXXXXX                ",
-                "         XXXXXXXX               ",
-                "         XXX0XXXX               ",
-                "         XXXXXXXX               ",
-                "          XXXXXX                ",
-                "      XXXXXXXXXXXXXX            ",
-                "    XXXXXXXXXXXXXXXXXX          ",
-                "   XXXXXXXXXXXXXXXXXXXX         ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "   XXXX  XXXX  XXXX  XXX        ",
-                "   XX    XX    XX    XX         ",
-                "   XX    XX    XX    XX         ",
-                "   XX    XX    XX    XX         ",
-                "   XX    XX    XX    XX         "
-            ],
-            // Frame 1
-            [
-                "          XXXXXX                ",
-                "         XXXXXXXX               ",
-                "         XXX0XXXX               ",
-                "         XXXXXXXX               ",
-                "          XXXXXX                ",
-                "      XXXXXXXXXXXXXX            ",
-                "    XXXXXXXXXXXXXXXXXX          ",
-                "   XXXXXXXXXXXXXXXXXXXX         ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "   XXXXX  XXXXX  XXXXX          ",
-                "    XXXX   XXXX   XXXX          ",
-                "     XXX    XXX    XXX          ",
-                "      XX     XX     XX          ",
-                "      XX     XX     XX          "
-            ],
-            // Frame 2
-            [
-                "          XXXXXX                ",
-                "         XXXXXXXX               ",
-                "         XXX0XXXX               ",
-                "         XXXXXXXX               ",
-                "          XXXXXX                ",
-                "      XXXXXXXXXXXXXX            ",
-                "    XXXXXXXXXXXXXXXXXX          ",
-                "   XXXXXXXXXXXXXXXXXXXX         ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "    XXXXX   XXXXX   XXXX        ",
-                "     XXXX    XXXX    XXX        ",
-                "      XXX     XXX     XX        ",
-                "       XX      XX      X        ",
-                "                                "
-            ],
-            // Frame 3
-            [
-                "          XXXXXX                ",
-                "         XXXXXXXX               ",
-                "         XXX0XXXX               ",
-                "         XXXXXXXX               ",
-                "          XXXXXX                ",
-                "      XXXXXXXXXXXXXX            ",
-                "    XXXXXXXXXXXXXXXXXX          ",
-                "   XXXXXXXXXXXXXXXXXXXX         ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "  XXXXXXXXXXXXXXXXXXXXXX        ",
-                "   XXXX  XXXX  XXXX  XXX        ",
-                "    XX    XX    XX    XX        ",
-                "    XX    XX    XX    XX        ",
-                "    XX    XX    XX    XX        ",
-                "    XX    XX    XX    XX        "
-            ]
-        ];
-
-        let frameIdx = 0;
-        let xPos = -100;
-
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const frame = horseRun[frameIdx];
-            const horseX = xPos;
-            const horseY = 150;
+            // Clear with a "grass" ground
+            ctx.fillStyle = "#7f8c8d";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#2ecc71";
+            ctx.fillRect(0, 260, canvas.width, 60);
+
+            const frame = horseFrames[frameIdx];
+            const offsetX = xPos;
+            const offsetY = 120;
 
             for (let y = 0; y < frame.length; y++) {
                 for (let x = 0; x < frame[y].length; x++) {
-                    const char = frame[y][x];
-                    if (char === 'X') {
-                        drawPixel(x + (horseX/scale), y + (horseY/scale), '#4e342e'); // Deep Brown
-                    } else if (char === '0') {
-                        drawPixel(x + (horseX/scale), y + (horseY/scale), '#ffffff'); // Eye
+                    if (frame[y][x] === 'X') {
+                        drawPixel(x + (offsetX / scale), y + (offsetY / scale), '#3e2723');
                     }
                 }
             }
 
-            xPos += 5;
-            if (xPos > canvas.width) xPos = -250;
+            xPos += 8;
+            if (xPos > canvas.width) xPos = -200;
 
-            if (Math.floor(xPos / 10) % 1 === 0) {
-                frameIdx = (frameIdx + 1) % horseRun.length;
+            // Simple frame timing
+            if (Math.floor(xPos / 16) % 1 === 0) {
+                frameIdx = (frameIdx + 1) % horseFrames.length;
             }
 
             requestAnimationFrame(animate);
