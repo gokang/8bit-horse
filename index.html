@@ -75,52 +75,37 @@
             position: absolute;
             top: 0;
             width: 10px;
-            height: 350px;
+            height: 400px;
             background: repeating-linear-gradient(to bottom, #f1c40f, #f1c40f 10px, transparent 10px, transparent 20px);
             z-index: 4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-
-        .cracker {
-            font-size: 50px;
-            margin-top: -15px;
-            animation: shake 0.1s infinite;
-            position: relative;
-        }
-        .cracker::after { content: "🧨"; }
 
         .explosion {
             position: absolute;
-            font-size: 60px;
+            font-size: 80px;
             pointer-events: none;
             z-index: 5;
             animation: burst 0.4s forwards;
+            transform: translate(-50%, -50%);
         }
 
         .falling-cracker {
             position: absolute;
-            font-size: 30px;
+            font-size: 40px;
             z-index: 6;
-            animation: fallCracker 1s forwards ease-in;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            50% { transform: translate(-1px, -2px) rotate(-1deg); }
-            100% { transform: translate(1px, -1px) rotate(1deg); }
+            animation: fallCracker 1.5s forwards ease-in;
+            transform-origin: center;
         }
 
         @keyframes burst {
-            0% { transform: scale(0.1); opacity: 1; }
-            50% { transform: scale(2); color: #fff; }
-            100% { transform: scale(3); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(2); color: #fff; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
         }
 
         @keyframes fallCracker {
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+            100% { transform: translateY(800px) rotate(720deg); opacity: 0; }
         }
 
         /* Container */
@@ -200,7 +185,11 @@
         }
         setInterval(createRedPocket, 400);
 
-        function explode(x, y) {
+        function triggerFirework(side) {
+            const x = side === 'left' ? window.innerWidth * 0.1 : window.innerWidth * 0.9;
+            const y = Math.random() * 350; // Random height along the string
+            
+            // Explosion effect
             const burst = document.createElement('div');
             burst.className = 'explosion';
             burst.innerText = '💥';
@@ -208,35 +197,26 @@
             burst.style.top = y + 'px';
             document.body.appendChild(burst);
             
-            // Spawn falling pieces
+            // The firecracker that drops
             const drop = document.createElement('div');
             drop.className = 'falling-cracker';
             drop.innerText = '🧨';
-            drop.style.left = x + 'px';
+            drop.style.left = (x - 15) + 'px';
             drop.style.top = y + 'px';
             document.body.appendChild(drop);
             
             setTimeout(() => burst.remove(), 400);
-            setTimeout(() => drop.remove(), 1000);
+            setTimeout(() => drop.remove(), 1500);
         }
 
-        setInterval(() => {
-            const crackers = document.querySelectorAll('.cracker');
-            if(crackers.length > 0) {
-                const target = crackers[Math.floor(Math.random() * crackers.length)];
-                const rect = target.getBoundingClientRect();
-                explode(rect.left, rect.top);
-            }
-        }, 200);
+        // Continually trigger explosions on both sides
+        setInterval(() => triggerFirework('left'), 250);
+        setInterval(() => triggerFirework('right'), 250);
     </script>
 
-    <!-- Hanging Firecrackers -->
-    <div class="firecracker-string" style="left: 10%;">
-        <div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div>
-    </div>
-    <div class="firecracker-string" style="right: 10%;">
-        <div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div><div class="cracker"></div>
-    </div>
+    <!-- Hanging Strings -->
+    <div class="firecracker-string" style="left: 10%;"></div>
+    <div class="firecracker-string" style="right: 10%;"></div>
 
     <!-- Gigantic Animated Lanterns -->
     <div class="lantern-container" style="left: 25%;">
