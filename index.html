@@ -34,6 +34,26 @@
             to { transform: translateY(110vh) rotate(360deg); }
         }
 
+        /* Chinese Duilian (Couplets) */
+        .duilian {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #e74c3c;
+            border: 4px solid #f1c40f;
+            padding: 20px 10px;
+            writing-mode: vertical-rl;
+            font-size: 40px;
+            color: #f1c40f;
+            text-align: center;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            line-height: 1.5;
+            letter-spacing: 10px;
+        }
+        .duilian.left { left: 40px; }
+        .duilian.right { right: 40px; }
+
         /* GIGANTIC Animated Lanterns with Wavy Strings */
         .lantern-container {
             position: absolute;
@@ -70,16 +90,7 @@
             to { transform: rotate(10deg); }
         }
 
-        /* HANGING EXPLODING FIRECRACKERS */
-        .firecracker-string {
-            position: absolute;
-            top: 0;
-            width: 10px;
-            height: 400px;
-            background: repeating-linear-gradient(to bottom, #f1c40f, #f1c40f 10px, transparent 10px, transparent 20px);
-            z-index: 4;
-        }
-
+        /* EXPLODING FIRECRACKERS */
         .explosion {
             position: absolute;
             font-size: 80px;
@@ -173,6 +184,10 @@
     </style>
 </head>
 <body>
+    <!-- Duilian (Chinese Couplets) -->
+    <div class="duilian left">万事如意</div>
+    <div class="duilian right">心想事成</div>
+
     <script>
         function createRedPocket() {
             const pocket = document.createElement('div');
@@ -186,10 +201,9 @@
         setInterval(createRedPocket, 400);
 
         function triggerFirework(side) {
-            const x = side === 'left' ? window.innerWidth * 0.1 : window.innerWidth * 0.9;
-            const y = Math.random() * 350; // Random height along the string
+            const x = side === 'left' ? window.innerWidth * 0.15 : window.innerWidth * 0.85;
+            const y = Math.random() * 400; 
             
-            // Explosion effect
             const burst = document.createElement('div');
             burst.className = 'explosion';
             burst.innerText = '💥';
@@ -197,11 +211,10 @@
             burst.style.top = y + 'px';
             document.body.appendChild(burst);
             
-            // The firecracker that drops
             const drop = document.createElement('div');
             drop.className = 'falling-cracker';
             drop.innerText = '🧨';
-            drop.style.left = (x - 15) + 'px';
+            drop.style.left = (x - 20) + 'px';
             drop.style.top = y + 'px';
             document.body.appendChild(drop);
             
@@ -209,25 +222,20 @@
             setTimeout(() => drop.remove(), 1500);
         }
 
-        // Continually trigger explosions on both sides
         setInterval(() => triggerFirework('left'), 250);
         setInterval(() => triggerFirework('right'), 250);
     </script>
 
-    <!-- Hanging Strings -->
-    <div class="firecracker-string" style="left: 10%;"></div>
-    <div class="firecracker-string" style="right: 10%;"></div>
-
     <!-- Gigantic Animated Lanterns -->
-    <div class="lantern-container" style="left: 25%;">
+    <div class="lantern-container" style="left: 30%;">
         <div class="lantern"></div>
         <div class="wavy-string"></div>
     </div>
-    <div class="lantern-container" style="left: 45%; animation-delay: -1s;">
+    <div class="lantern-container" style="left: 50%; animation-delay: -1s;">
         <div class="lantern"></div>
         <div class="wavy-string"></div>
     </div>
-    <div class="lantern-container" style="right: 25%; animation-delay: -2s;">
+    <div class="lantern-container" style="right: 30%; animation-delay: -2s;">
         <div class="lantern"></div>
         <div class="wavy-string"></div>
     </div>
