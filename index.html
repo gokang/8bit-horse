@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-Bit Animated Horse</title>
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            image-rendering: pixelated;
+        }
+        canvas {
+            background-color: #eee;
+            border: 4px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="horseCanvas" width="320" height="320"></canvas>
+    <script>
+        const canvas = document.getElementById('horseCanvas');
+        const ctx = canvas.getContext('2d');
+        const scale = 10;
+
+        // Simple 8-bit horse frames (16x16)
+        const frames = [
+            [
+                "      XXXX      ",
+                "     X    X     ",
+                "    X X  X X    ",
+                "    X  XX  X    ",
+                "     XXXXXX     ",
+                "    X      X    ",
+                "   X        X   ",
+                "  XXXXXXXXXXXX  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  ",
+                "  X X      X X  "
+            ],
+            [
+                "      XXXX      ",
+                "     X    X     ",
+                "    X X  X X    ",
+                "    X  XX  X    ",
+                "     XXXXXX     ",
+                "    X      X    ",
+                "   X        X   ",
+                "  XXXXXXXXXXXX  ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   ",
+                "   X X    X X   "
+            ]
+        ];
+
+        let currentFrame = 0;
+
+        function drawHorse() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const frame = frames[currentFrame];
+            
+            for (let y = 0; y < 16; y++) {
+                for (let x = 0; x < 16; x++) {
+                    if (frame[y][x] === 'X') {
+                        ctx.fillStyle = '#633'; // Brown
+                        ctx.fillRect(x * scale + 80, y * scale + 80, scale, scale);
+                    }
+                }
+            }
+            
+            currentFrame = (currentFrame + 1) % frames.length;
+        }
+
+        setInterval(drawHorse, 200);
+    </script>
+</body>
+</html>
