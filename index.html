@@ -20,6 +20,25 @@
             position: relative;
         }
 
+        /* Background Art: Clouds & Mountains */
+        .bg-art {
+            position: absolute;
+            font-family: monospace;
+            white-space: pre;
+            font-size: 8px;
+            color: rgba(241, 196, 15, 0.2); /* Faded Gold */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .cloud { top: 50px; animation: float 10s infinite linear; }
+        .mountain { bottom: 0; font-size: 10px; color: rgba(0, 0, 0, 0.1); width: 100%; text-align: center; }
+
+        @keyframes float {
+            from { transform: translateX(-100vw); }
+            to { transform: translateX(100vw); }
+        }
+
         /* Animated Lanterns */
         .lantern {
             position: absolute;
@@ -29,8 +48,16 @@
             animation: sway 3s infinite ease-in-out alternate;
             z-index: 1;
         }
-        .lantern::after {
-            content: "🏮";
+        .lantern::after { content: "🏮"; }
+        .lantern::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100px;
+            background: #f1c40f;
+            z-index: -1;
         }
         
         @keyframes sway {
@@ -38,9 +65,17 @@
             to { transform: rotate(5deg); }
         }
 
+        /* Red Envelopes / Firecrackers */
+        .lucky {
+            position: absolute;
+            font-size: 40px;
+            image-rendering: pixelated;
+            z-index: 1;
+        }
+
         .container {
             text-align: center;
-            background-color: rgba(192, 57, 43, 0.9); /* Red with slight opacity */
+            background-color: rgba(192, 57, 43, 0.85);
             padding: 40px;
             border: 10px solid #f1c40f;
             border-radius: 20px;
@@ -59,7 +94,7 @@
             white-space: pre;
             font-size: 8px;
             line-height: 1.2;
-            color: #f1c40f; /* Gold text */
+            color: #f1c40f;
             text-align: center;
             margin: 0 auto;
             display: inline-block;
@@ -94,11 +129,35 @@
     </style>
 </head>
 <body>
-    <!-- Background Lanterns -->
-    <div class="lantern" style="left: 10%;"></div>
-    <div class="lantern" style="left: 30%;"></div>
-    <div class="lantern" style="left: 60%;"></div>
-    <div class="lantern" style="left: 85%;"></div>
+    <!-- Background Chinese Art -->
+    <div class="bg-art cloud" style="top: 10%; animation-delay: 0s;">
+      _  _
+    ( `   )_
+   (    )    `)
+    (_   (_  _)
+    </div>
+    <div class="bg-art cloud" style="top: 25%; animation-delay: -5s;">
+      _  _
+    ( `   )_
+   (    )    `)
+    (_   (_  _)
+    </div>
+
+    <div class="bg-art mountain">
+      /\      /\          /\
+     /  \    /  \  /\    /  \
+    /    \  /    \/  \  /    \
+   /      \/          \/      \
+    </div>
+
+    <!-- Festive Props -->
+    <div class="lantern" style="left: 5%;"></div>
+    <div class="lantern" style="left: 20%;"></div>
+    <div class="lantern" style="left: 75%;"></div>
+    <div class="lantern" style="left: 90%;"></div>
+    
+    <div class="lucky" style="bottom: 5%; left: 5%;">🧧</div>
+    <div class="lucky" style="bottom: 5%; right: 5%;">🧨</div>
 
     <div class="container">
         <div class="ascii-art">
