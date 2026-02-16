@@ -1,5 +1,7 @@
 # 8-Bit Year of the Horse 2026 🐎🧧✨
 
+![8-Bit Year of the Horse 2026](assets/preview.gif)
+
 A festive, ultra-majestic 8-bit animated celebration for the **Chinese New Year 2026**.
 
 ## 🐎 Features
