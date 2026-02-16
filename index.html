@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-Bit Year of the Horse 2026 🐎</title>
+    <title>8-Bit Year of the Horse 2026 🐎🧧</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         body {
-            background-color: #c0392b;
+            background-color: #c0392b; /* Traditional Chinese Red */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -15,12 +15,32 @@
             height: 100vh;
             margin: 0;
             font-family: 'Press+Start+2P', cursive;
-            color: #f1c40f;
+            color: #f1c40f; /* Gold */
             overflow: hidden;
+            position: relative;
         }
+
+        /* Animated Lanterns */
+        .lantern {
+            position: absolute;
+            top: -20px;
+            font-size: 50px;
+            image-rendering: pixelated;
+            animation: sway 3s infinite ease-in-out alternate;
+            z-index: 1;
+        }
+        .lantern::after {
+            content: "🏮";
+        }
+        
+        @keyframes sway {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
         .container {
             text-align: center;
-            background-color: #1a1a1a;
+            background-color: rgba(192, 57, 43, 0.9); /* Red with slight opacity */
             padding: 40px;
             border: 10px solid #f1c40f;
             border-radius: 20px;
@@ -31,17 +51,21 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: 2;
         }
+
         .ascii-art {
             font-family: monospace;
             white-space: pre;
             font-size: 8px;
             line-height: 1.2;
-            color: #f1c40f;
+            color: #f1c40f; /* Gold text */
             text-align: center;
             margin: 0 auto;
             display: inline-block;
+            text-shadow: 2px 2px #000;
         }
+
         .horse-wrapper {
             font-size: 150px;
             display: inline-block;
@@ -51,16 +75,18 @@
             transform: scaleX(-1); 
             animation: gallop 0.4s infinite ease-in-out alternate, moveAcross 4s infinite linear;
         }
+
         .chinese {
             font-size: 28px;
             letter-spacing: 10px;
             text-shadow: 3px 3px #000;
-            z-index: 10;
         }
+
         @keyframes gallop {
             from { transform: scaleX(-1) translateY(0) rotate(-5deg); }
             to { transform: scaleX(-1) translateY(-30px) rotate(5deg); }
         }
+
         @keyframes moveAcross {
             from { left: -200px; }
             to { left: 1000px; }
@@ -68,6 +94,12 @@
     </style>
 </head>
 <body>
+    <!-- Background Lanterns -->
+    <div class="lantern" style="left: 10%;"></div>
+    <div class="lantern" style="left: 30%;"></div>
+    <div class="lantern" style="left: 60%;"></div>
+    <div class="lantern" style="left: 85%;"></div>
+
     <div class="container">
         <div class="ascii-art">
  _   _   _   ____   ____  __   __ 
